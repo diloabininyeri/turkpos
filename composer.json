@@ -1,0 +1,22 @@
+{
+    "name": "zeus/turkpos",
+    "description": "turkpos sanal pos entegre package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "dılo sürücü",
+            "email": "berxudar@gmail.com"
+        }
+    ],
+    "require": {
+        "mockery/mockery": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Turkpos\\":"src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "dev-master"
+    }
+}
