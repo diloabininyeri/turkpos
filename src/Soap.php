@@ -63,13 +63,15 @@ class Soap
 
 
     /**
-     * @return bool
+     * @return string
      *
      *
      */
     function getSoapResultMethod()
     {
 
+
+        /** @noinspection PhpUndefinedMethodInspection */
         $method = $this->object->getSoapActionMethod() . 'Result';
 
         if (isset($this->result))

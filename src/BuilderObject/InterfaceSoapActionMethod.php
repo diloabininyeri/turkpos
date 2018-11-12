@@ -2,15 +2,18 @@
 
 namespace Turkpos\BuilderObject;
 
+/**
+ * Interface InterfaceSoapActionMethod
+ * @package Turkpos\BuilderObject
+ * @var $soapAction
+ */
 
 interface InterfaceSoapActionMethod
 {
 
 
-
-
     /**
-     * @return string
+     * @return mixed|string
      *
      */
     public function getSoapActionMethod():string ;
