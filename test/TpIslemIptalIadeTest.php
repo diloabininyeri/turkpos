@@ -15,7 +15,7 @@ class TpIslemIptalIadeTest extends TestCase
 
         $soap = new Soap();
 
-        $tpIslemIptalIade = new TpIslemIptalIade(1008929166, 1, 34555);
+        $tpIslemIptalIade = new TpIslemIptalIade('0c13d406-873b-403b-9c09-a5766840d98c', 1, 34555);
 
 
         $res = $soap->send($tpIslemIptalIade)->getResult();

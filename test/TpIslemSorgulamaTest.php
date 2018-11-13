@@ -16,7 +16,7 @@ class TpIslemSorgulamaTest extends TestCase
         $this->setConfigs();
 
         $soap = new Soap();
-        $tpIslemSorgulama = new TpIslemSorgulama('2b8185be-21fc-474b-936e-cfed32f412c3', 3445, 45, 5);
+        $tpIslemSorgulama = new TpIslemSorgulama('0c13d406-873b-403b-9c09-a5766840d98c', 3445, 45, 5);
 
         $res = $soap->send($tpIslemSorgulama)->getSoapResultMethod();
 

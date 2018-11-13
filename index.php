@@ -13,7 +13,7 @@ use Turkpos\BuilderObject\TpIslemIptalIade;
 use Turkpos\BuilderObject\TpIslemSorgulama;
 use Turkpos\BuilderObject\TpIslemOdeme;
 use Turkpos\BuilderObject\SHA2B64;
-use Turkpos\BuilderObject\TpOzenOranListele;
+use Turkpos\BuilderObject\TpOzelOranListele;
 
 
 Config::$CLIENT_CODE = 10738;
@@ -34,36 +34,17 @@ function p($res)
 
 
 
+/*
 
 
 
-$tpOzenOranListele=new TpOzenOranListele('e20ce075-a373-4268-a8c0-dde87e69004a');
+$tpOzenOranListele=new TpOzelOranListele('e20ce075-a373-4268-a8c0-dde87e69004a');
 
 
 
 $soap=new Soap();
 
 
-
-
-$res1=$soap->send($tpOzenOranListele)->getResult();
-
-$soap = new Soap();
-
-$binsanal = new BinSanalPos();
-
-$res = $soap->send($binsanal)->getSoapResultMethod();
-
-
-
-
-
-p($res);
-
-
-/*
- *
- *
 $client = new SoapClient("https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl");
 $spid = 1011;
 $guid = '0c13d406-873b-403b-9c09-a5766840d98c';

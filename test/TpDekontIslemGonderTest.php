@@ -19,7 +19,7 @@ class TpDekontIslemGonderTest extends TestCase
 
         $this->setConfigs();
         $soap = new Soap();
-        $tpDekontIslemGonder = new TpDekontIslemGonder(1008929166, 34444, "huseyin.ssari@gmail.com");
+        $tpDekontIslemGonder = new TpDekontIslemGonder('0c13d406-873b-403b-9c09-a5766840d98c', 34444, "huseyin.ssari@gmail.com");
         $res = $soap->send($tpDekontIslemGonder)->getSoapResultMethod();
 
 
