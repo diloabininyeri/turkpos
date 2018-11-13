@@ -29,11 +29,11 @@ class BinSanalPosTest extends TestCase
 
         $binsanal = new BinSanalPos();
 
-        $res = $soap->send($binsanal)->getResult();
+        $res = $soap->send($binsanal)->getSoapResultMethod();
 
-        $res->BIN_SanalPosResult->Sonuc_Str;
+        $sonuc=$res->Sonuc_Str;
 
-        $this->assertEquals($res->BIN_SanalPosResult->Sonuc_Str, 'Başarılı');
+        $this->assertEquals($sonuc, 'Başarılı');
 
 
     }

@@ -37,7 +37,7 @@ class Soap
 
         $array = (array)$object;
 
-        $this->result = $this->soap->__soapCall($object->getSoapActionMethod(), $array);
+        $this->result = $this->soap->__soapCall($object->getSoapActionMethod(), array($array));
 
 
         return $this;

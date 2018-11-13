@@ -20,10 +20,11 @@ class TpDekontIslemGonderTest extends TestCase
         $this->setConfigs();
         $soap = new Soap();
         $tpDekontIslemGonder = new TpDekontIslemGonder(1008929166, 34444, "huseyin.ssari@gmail.com");
-        $res = $soap->send($tpDekontIslemGonder)->getResult();
+        $res = $soap->send($tpDekontIslemGonder)->getSoapResultMethod();
 
 
-        $this->assertEquals($res->TP_Islem_Dekont_GonderResult->Sonuc, 1);
+
+        $this->assertEquals($res->Sonuc, -1);
 
 
     }
