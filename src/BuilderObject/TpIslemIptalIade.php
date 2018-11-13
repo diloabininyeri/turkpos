@@ -4,6 +4,8 @@
 namespace Turkpos\BuilderObject;
 
 
+use Turkpos\Config;
+
 class TpIslemIptalIade implements InterfaceSoapActionMethod
 {
 
@@ -30,7 +32,7 @@ class TpIslemIptalIade implements InterfaceSoapActionMethod
         $this->GUID = $guid;
         $this->Durum = $durum;
         $this->Dekont_ID = $dekontId;
-        $this->G = new G(10738, "test", "test");
+        $this->G = new G(Config::$CLIENT_CODE, Config::$CLIENT_USERNAME, Config::$CLIENT_PASSWORD);
     }
 
 
