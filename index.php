@@ -33,7 +33,17 @@ function p($res)
 }
 
 
+$soap = new Soap();
 
+$binsanal = new BinSanalPos();
+
+$res = $soap
+    ->send($binsanal)
+    ->getSonucStr();
+
+
+
+p($res);
 /*
 
 

@@ -80,4 +80,22 @@ class Soap
 
         return false;
     }
+
+
+    /**
+     * @return bool
+     *
+     */
+    function getSonucStr()
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        $method = $this->object->getSoapActionMethod() . 'Result';
+
+        if (isset($this->result))
+            return $this->result->$method->Sonuc_Str;
+
+
+        return false;
+
+    }
 }
