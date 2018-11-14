@@ -5,6 +5,7 @@ namespace Turkpos;
 
 use SoapClient;
 use Turkpos\BuilderObject\InterfaceSoapActionMethod;
+use SimpleXMLElement;
 
 
 class Soap
@@ -49,12 +50,12 @@ class Soap
      * @return bool|mixed
      *
      */
-    function getResult()
+    function getResult(): ?array
     {
 
 
         if (isset($this->result))
-            return $this->result;
+            return (array)$this->result;
 
 
         return false;
@@ -63,11 +64,11 @@ class Soap
 
 
     /**
-     * @return string
+     * @return array|false
      *
      *
      */
-    function getSoapResultMethod()
+    function getSoapResultMethod(): ?array
     {
 
 
@@ -75,12 +76,30 @@ class Soap
         $method = $this->object->getSoapActionMethod() . 'Result';
 
         if (isset($this->result))
-            return $this->result->$method;
+            return (array)$this->result->$method;
 
 
         return false;
     }
 
+
+    /**
+     * @return bool
+     *
+     */
+
+    function getSonuc()
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        $method = $this->object->getSoapActionMethod() . 'Result';
+
+        if (isset($this->result))
+            return $this->result->$method->Sonuc;
+
+
+        return false;
+
+    }
 
     /**
      * @return bool
@@ -98,4 +117,38 @@ class Soap
         return false;
 
     }
+
+
+    /**
+     * @return array|false
+     *
+     *
+     */
+    function getAnyData(): ?array
+    {
+
+        /** @noinspection PhpUndefinedMethodInspection */
+        $method = $this->object->getSoapActionMethod() . 'Result';
+
+        if (isset($this->result)) {
+            $response = $this->result->$method->DT_Bilgi->any;
+
+            $xmlString = "<?xml version='1.0' standalone='yes'?><root>$response</root>";
+
+            $xml = str_replace(array("diffgr:", "msdata:"), '', $xmlString);
+            $data = simplexml_load_string($xml);
+            $result = $data->diffgram->NewDataSet;
+
+            return (array)$result;
+
+
+        }
+
+
+        return false;
+
+
+    }
+
+
 }

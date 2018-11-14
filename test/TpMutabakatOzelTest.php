@@ -13,10 +13,13 @@ class TpMutabakatOzelTest extends TestCase
     {
 
 
-        $tpMutabakatOzel = new TpMutabakatOzel('0c13d406-873b-403b-9c09-a5766840d98c', '2018-11-12', '2018-11-15');
+        $tpMutabakatOzel = new TpMutabakatOzel('0c13d406-873b-403b-9c09-a5766840d98c', '20.11.2015 00:00:00', '20.11.2015 15:15:00');
         $soap = new Soap();
         $res = $soap->send($tpMutabakatOzel)->getSoapResultMethod();
 
+
+
+        print_r($res);
         $this->assertIsInt(abs($res->Sonuc));
 
 
