@@ -1,11 +1,11 @@
 <?php
+/** @noinspection PhpComposerExtensionStubsInspection */
 
 namespace Turkpos;
 
 
 use SoapClient;
 use Turkpos\BuilderObject\InterfaceSoapActionMethod;
-use SimpleXMLElement;
 
 
 class Soap
@@ -82,6 +82,35 @@ class Soap
         return false;
     }
 
+    /**
+     * @return array|bool
+     *
+     */
+    function getAnyData()
+    {
+
+        /** @noinspection PhpUndefinedMethodInspection */
+        $method = $this->object->getSoapActionMethod() . 'Result';
+
+        if ($this->getSonuc() == 1) {
+            $response = $this->result->$method->DT_Bilgi->any;
+
+            $xmlString = "<?xml version='1.0' standalone='yes'?><root>$response</root>";
+
+            $xml = str_replace(array("diffgr:", "msdata:"), '', $xmlString);
+            $data = simplexml_load_string($xml);
+            $result = $data->diffgram->NewDataSet;
+
+            return (array)$result;
+
+
+        }
+
+
+        return $this->getSonucStr();
+
+
+    }
 
     /**
      * @return bool
@@ -115,38 +144,6 @@ class Soap
 
 
         return false;
-
-    }
-
-
-    /**
-     * @return array|false
-     *
-     *
-     */
-    function getAnyData(): ?array
-    {
-
-        /** @noinspection PhpUndefinedMethodInspection */
-        $method = $this->object->getSoapActionMethod() . 'Result';
-
-        if (isset($this->result)) {
-            $response = $this->result->$method->DT_Bilgi->any;
-
-            $xmlString = "<?xml version='1.0' standalone='yes'?><root>$response</root>";
-
-            $xml = str_replace(array("diffgr:", "msdata:"), '', $xmlString);
-            $data = simplexml_load_string($xml);
-            $result = $data->diffgram->NewDataSet;
-
-            return (array)$result;
-
-
-        }
-
-
-        return false;
-
 
     }
 

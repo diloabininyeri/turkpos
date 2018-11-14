@@ -17,6 +17,9 @@ use Turkpos\BuilderObject\TpOzelOranListele;
 use Turkpos\BuilderObject\TpMutabakatOzel;
 
 
+use Turkpos\BuilderObject\TpOzelOranSkListe;
+
+
 Config::$CLIENT_CODE = 10738;
 
 Config::$CLIENT_USERNAME = 'test';
@@ -33,13 +36,12 @@ function p($res)
     print_r($res);
 }
 
-
-$bin = new BinSanalPos();
 $soap = new Soap();
-$res = $soap->send($bin)->getAnyData();
+$tpIslemSorgulama = new TpIslemSorgulama('0c13d406-873b-403b-9c09-a5766840d98c', 3445, 45, 5);
 
+$res = $soap->send($tpIslemSorgulama)->getAnyData();
 
 echo arrayToJson($res);
 
-p($res);
+
 
