@@ -39,5 +39,7 @@ $soap = new Soap();
 $res = $soap->send($bin)->getAnyData();
 
 
+echo arrayToJson($res);
+
 p($res);
 

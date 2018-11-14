@@ -14,7 +14,8 @@
     "autoload": {
         "psr-4": {
             "Turkpos\\":"src/"
-        }
+        },
+        "files": ["src/helpers/functions.php"]
     },
     "require-dev": {
         "phpunit/phpunit": "dev-master"
