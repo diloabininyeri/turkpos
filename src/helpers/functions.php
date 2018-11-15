@@ -13,11 +13,11 @@ if (!function_exists('arrayToJson')) {
         if (gettype($data) == "array") {
 
             /** @noinspection PhpComposerExtensionStubsInspection */
-            return json_encode(["status" => true, "data" => $data],  JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+            return json_encode(["status" => true, "data" => $data], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
         }
 
         /** @noinspection PhpComposerExtensionStubsInspection */
-        return json_encode(["status" => false, "detail" => $data],JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+        return json_encode(["status" => false, "detail" => $data], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     }
 }

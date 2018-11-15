@@ -1,15 +1,17 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: nkolayofis
+ * Date: 15.11.2018
+ * Time: 12:31
+ */
 
 namespace Turkpos\BuilderObject;
 
-use phpDocumentor\Reflection\DocBlock\Tags\Deprecated;
+use SoapClient;
+use Turkpos\Config;
 
-/**
- * Class TpIslemOdeme
- * @package Turkpos\BuilderObject
- * @deprecated
- */
-class TpIslemOdeme implements InterfaceSoapActionMethod
+class Odeme implements InterfaceSoapActionMethod
 {
 
 
@@ -68,7 +70,7 @@ class TpIslemOdeme implements InterfaceSoapActionMethod
         $this->Taksit = $taksit;
         $this->Islem_Tutar = $islemtutar;
         $this->Toplam_Tutar = $toplamTutar;
-        $this->Islem_Hash = NULL;
+        $this->Islem_Hash = $this->buildSHA2B64(Config::$CLIENT_CODE . $guid . $sanalPosId . $taksit . $islemtutar . $toplamTutar . $siparisId . $hataUrl . $basariliUrl);
         $this->Islem_ID = $islemid;
         $this->IPAdr = $ipAdr;
         $this->Ref_URL = $RefUrl;
@@ -84,8 +86,19 @@ class TpIslemOdeme implements InterfaceSoapActionMethod
 
     }
 
+    /**
+     * @param $Islem_Guvenlik_Str
+     * @return mixed
+     *
+     */
+    private function buildSHA2B64($Islem_Guvenlik_Str)
+    {
 
+        $client = new SoapClient(Config::$SERVICE_URI);
+        $nesneSha = new SHA2B64($Islem_Guvenlik_Str);
+        return $client->SHA2B64($nesneSha)->SHA2B64Result;
 
+    }
 
     /**
      * @return string
@@ -97,10 +110,8 @@ class TpIslemOdeme implements InterfaceSoapActionMethod
         return $this->soapAction;
     }
 
-
     /**
      * @param $soapAction
-     *
      *
      */
     public function setSoapActionMethod($soapAction): void
@@ -108,4 +119,5 @@ class TpIslemOdeme implements InterfaceSoapActionMethod
 
         $this->soapAction = $soapAction;
     }
+
 }
