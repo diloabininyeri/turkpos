@@ -14,19 +14,19 @@ turkpos sanal pos entegre paketi
 
 # Sınıflar!
 
-  - ######Soap
-  - ######Odeme
-  - ######TpOzelOranSkListe 
-  - ######BinSanalPos
-  - ######TpDekontIslem
-  - ######TpDekontIslemGonder
-  - ###### TpIslemIptalIade
-  -  ######TpIslemOdeme
-  - ######TpIslemSorgulama
-  - ######TpOzelOranListele
-  - ######TpOzelOranSkGuncelle
-  - ######TpOzelOranSkListe
-  - ###### TpMutabakatOzel
+  - Soap
+  - Odeme
+  - TpOzelOranSkListe 
+  - BinSanalPos
+  - TpDekontIslem
+  - TpDekontIslemGonder
+  - TpIslemIptalIade
+  - TpIslemOdeme
+  - TpIslemSorgulama
+  - TpOzelOranListele
+  - TpOzelOranSkGuncelle
+  - TpOzelOranSkListe
+  - TpMutabakatOzel
 
 
 Sınıflarının kullanımı:
@@ -312,76 +312,1289 @@ $ gulp watch
 ```sh
 $ karma test
 ```
-#### Building for source
-For production release:
-```sh
-$ gulp build --prod
+#### AYINTILI DOKUMAN
+### TURK ELEKTRONİK PARA A.Ş
+
+## Dış Kurum Entegrasyonları
+
+## TURKPOS API
+
+## Yardım Dokümanı
+
+###### Sürüm 1.
+
+
+#### 1. SÜRÜM GEÇMİŞİ^
+
 ```
-Generating pre-built zip archives for distribution:
-```sh
-$ gulp build dist --prod
+Sürüm Tarih Hazırlayan Açıklama
 ```
-### Docker
-Dillinger is very easy to install and deploy in a Docker container.
-
-By default, the Docker will expose port 8080, so change this within the Dockerfile if necessary. When ready, simply use the Dockerfile to build the image.
-
-```sh
-cd dillinger
-docker build -t joemccann/dillinger:${package.json.version} .
 ```
-This will create the dillinger image and pull in the necessary dependencies. Be sure to swap out `${package.json.version}` with the actual version of Dillinger.
+1. 0 27 .05.2015^ Hüseyin SARI Doküman oluşturuldu.^
+```
+```
+1.1 12.10.2015 Hüseyin SARI
+```
+```
+Metod, parametre ve web servis adres değişikliği yapıldı. Test
+verileri eklendi.
+```
+```
+1 .5 23.11.2015 Hüseyin SARI
+```
+- Test ve gerçek ortam web servisleri ayrıldı.
+- TP_Pre_Islem_Odeme metot isim değişikliği, parametre
+değişikliği yapıldı. TP_Islem_Odeme olarak çağrılacaktır.
+- TP_Islem_Sorgulama metodu eklendi.
+- TP_Islem_Iptal_Iade metodu eklendi.
+- TP_Mutabakat_Ozet metodu eklendi.
+- TP_Dekont_Islem metot ismi TP_Islem_Dekont_Gonder
+olarak değiştirildi.
+- Şifreleme fonksiyonu eklendi. (SHA2B64)
+- Hata kodları eklendi.
 
-Once done, run the Docker image and map the port to whatever you wish on your host. In this example, we simply map port 8000 of the host to port 8080 of the Docker (or whatever port was exposed in the Dockerfile):
+```
+1.6 11.07.2017 Hüseyin SARI
+```
+```
+TP_Islem_Odeme_BKM - BKM Express ile Ödeme metodu
+eklendi.
+```
+#### 2. ÖZET
 
-```sh
-docker run -d -p 8000:8080 --restart="always" <youruser>/dillinger:${package.json.version}
+```
+Kredi kartı ile taksitli veya tek çekim tahsilat sağlamak amacıyla hazırlanmış
+```
+```
+entegrasyon api yardım dokümandır. Firmanın web sitesinden elektronik tahsilat
+```
+```
+altyapısını kullanarak TurkPos sistemi ile yapılacak ödemeleri kapsar.
+```
+#### 3. BAĞLANTI ADRESLERİ
+
+###### 3. 1. Gerçek Ortam
+
+```
+https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_prod.asmx
+```
+###### 3.2. Test Ortamı
+
+```
+http://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx
+```
+```
+Test Parametre Değer
+```
+```
+CLIENT_CODE 10738
+```
+```
+CLIENT_USERNAME Test
+```
+```
+CLIENT_PASSWORD Test
+```
+```
+GUID 0c13d406-873b-403b-9c09-a5766840d98c
 ```
 
-Verify the deployment by navigating to your server address in your preferred browser.
+#### 4. TANIMLAR
 
-```sh
-127.0.0.1:8000
+#### Firma : TURK Elektronik Para A.Ş.
+
+```
+Üye İşyeri : TurkPos alt yapısını kullanacak firma
+```
+```
+Müşteri : Üye işyerinin web site üyeleri
+```
+```
+Parametre Kısaltmaları:
+```
+```
+NS : Nesne N : string L : Long I : Integer M : Money
+```
+#### 5. METOTLAR
+
+```
+Aksi belirtilmedikçe metotlara gönderilecek tüm parametreler zorunlu alandır.
+```
+```
+Web Servis metotlarında ST_WS_Guvenlik nesnesi ile güvenlik kontrolü
+```
+```
+yapılmaktadır. ST_WS_Guvenlik nesnesinin , aşağıdaki bilgiler ile geçilebilmesi
+```
+```
+için ayrıca sunucu IP Adresi (birden fazla IP Adresi mevcut ise IP Adres
+```
+```
+Blokları) tarafımıza göndermeniz gerekmektedir.
+```
+```
+ST_WS_Guvenlik nesnesi :
+```
+```
+Aşağıdaki bilgiler, entegrasyon işlemi başarıyla tamamlandıktan sonra
+```
+```
+iletilecektir. Bu aşamaya kadar Madde 3.2. deki test bilgilerini
+```
+```
+kullanabilirsiniz.
+```
+```
+Parametre Tip Uzunluk Açıklama
+CLIENT_CODE int 5 Terminal ID, tarafımızdan iletilecektir.
+CLIENT_USERNAME string - Kullanıcı Adı, tarafımızdan iletilecektir.
+CLIENT_PASSWORD string - Şifre, tarafımızdan iletilecektir.
 ```
 
-#### Kubernetes + Google Cloud
+###### 5. 1. TP_Ozel_Oran_Liste
 
-See [KUBERNETES.md](https://github.com/joemccann/dillinger/blob/master/KUBERNETES.md)
+```
+Firma tarafından üye işyerine özel verilmiş sanal pos oranları listelenir. Üye
+```
+```
+işyeri bu oranlar üzerinde değişiklik yapabilir (Metod 5 .2)
+```
+```
+MO_x : Üye İşyeri Oranı
+```
+```
+Gönderilecek Parametreler:
+```
+```
+Parametre Tip U Açıklama
+G NS - ST_WS_Guvenlik Nesnesi
+GUID N 36 Üye İşyerine ait Anahtar
+```
+```
+Sonuç Parametreleri:
+```
+```
+Parametre Tip U Açıklama
+Ozel_Oran_ID L - Özel Oran ID si
+GUID N 36 Üye İşyerine ait Anahtar
+```
+```
+Tarih_Bas N 10
+```
+```
+Özel Oranların aktif olacağı tarih
+(Örn. dd.MM.yyyy)
+```
+```
+Tarih_Bit N 10
+```
+```
+Özel Oranların pasif olacağı tarih
+(Örn. dd.MM.yyyy)
+SanalPOS_ID I 4 Sanal Pos numarası
+Kredi_Karti_Banka N 20 Kredi Kartı Markası (Bonus, Axess vs)
+Kredi_Karti_Banka_Gorsel N - Kredi Kartı Marka Görseli
+MO_ 01 M - Tek Çekim Oranı
+MO_ 02 M - 2. Taksit Oranı
+MO_ 03 M - 3. Taksit Oranı
+MO_ 04 M - 4. Taksit Oranı
+MO_ 05 M - 5. Taksit Oranı
+MO_ 06 M - 6. Taksit Oranı
+MO_ 07 M - 7. Taksit Oranı
+MO_ 08 M - 8. Taksit Oranı
+MO_ 09 M - 9. Taksit Oranı
+```
+```
+Herhangi bir taksit oranı - 1 veya - 2 ise diğer bir deyişle “ 0 ” dan küçük olduğu
+```
+```
+durumlarda bu taksit seçeneği o kart markası için kullanılamaz demektir.
+```
+
+```
+Örnek Sonuç Parametreleri:
+```
+###### 5 .2. TP_Ozel_Oran_SK_Liste
+
+```
+Özel oran son kullanıcı liste, standart olarak Madde 5 .1 deki metottan
+```
+```
+dönen oranların aynısı döner. Üye işyerinin müşterisine göstereceği
+```
+```
+komisyon oranlarını listeler.
+```
+```
+Örneğin, firma Axess kredi kartı 3 taksit için verdiği komisyon oranı %3.
+```
+```
+olsun. Üye işyeri bu oranın müşterileri için fazla olduğunu düşünür ve Madde
+```
+```
+5.3’teki metodu kullanarak bu komisyon oranını %2,50 olarak günceller.
+```
+```
+Müşteri, üye işyerinin sitesinde, ödeme aşamasında bu taksit komisyon
+```
+```
+oranını %2.50 olarak görür ve ödemeyi yapar. Firma, müşteri oranı %2,50’yi
+```
+```
+müşteriden, iki orasındaki %0,65’lik farkı ise üye işyerinden tahsil eder.
+```
+```
+Gönderilecek Parametreler:
+```
+```
+Parametre Tip U Açıklama
+G NS - ST_WS_Guvenlik Nesnesi
+GUID N 36 Üye İşyerine ait Anahtar
+```
+```
+<DT_Bilgi>
+<DT_Ozel_Oranlar diffgr:id="DT_Ozel_Oranlar1" msdata:rowOrder="0">
+<Ozel_Oran_ID>0</Ozel_Oran_ID>
+<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>
+<Tarih_Bas>28.09.2015</Tarih_Bas>
+<Tarih_Bit>01.01.2016</Tarih_Bit>
+<SanalPOS_ID>1009</SanalPOS_ID>
+<Kredi_Karti_Banka>Diğer Banka Kartları</Kredi_Karti_Banka>
+<Kredi_Karti_Banka_Gorsel>https://param.com.tr/images/banka/
+diger_kredi_kart.png</Kredi_Karti_Banka_Gorsel>
+<MO_01>1.7500</MO_01>
+<MO_02>-2.0000</MO_02>
+<MO_03>-2.0000</MO_03>
+<MO_04>-2.0000</MO_04>
+<MO_05>-2.0000</MO_05>
+<MO_06>-2.0000</MO_06>
+<MO_07>-2.0000</MO_07>
+<MO_08>-2.0000</MO_08>
+<MO_09>-2.0000</MO_09>
+</DT_Ozel_Oranlar>
+...
+</DT_Bilgi>
+<Sonuc>1</Sonuc>
+<Sonuc_Str>Başarılı</Sonuc_Str>
+```
+
+_Sonuç Parametreleri:_
+
+```
+Parametre Tip U Açıklama
+Sonuc N - İşlem sonucu
+Sonuc_Str N - İşlem sonuç açıklama
+Ozel_Oran_SK_ID L - Özel Oran SK Liste den gelen ID si
+GUID N 36 Üye İşyerine ait Anahtar
+SanalPOS_ID I 4 Sanal Pos numarası
+Kredi_Karti_Banka N 20 Kredi Kartı Markası (Bonus, Axess vs)
+Kredi_Karti_Banka_Gorsel N - Kredi Kartı Marka Görseli
+MO_01 M - Tek Çekim Oranı
+MO_02 M - 2. Taksit Oranı
+MO_03 M - 3. Taksit Oranı
+MO_04 M - 4. Taksit Oranı
+MO_05 M - 5. Taksit Oranı
+MO_06 M - 6. Taksit Oranı
+MO_07 M - 7. Taksit Oranı
+MO_08 M - 8. Taksit Oranı
+MO_09 M - 9. Taksit Oranı
+```
+_Örnek Sonuç Parametreleri:_
+
+```
+<DT_Bilgi>
+<DT_Ozel_Oranlar_SK diffgr:id="DT_Ozel_Oranlar_SK1"
+msdata:rowOrder="0">
+<Ozel_Oran_SK_ID>0</Ozel_Oran_SK_ID>
+<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>
+<SanalPOS_ID>1009</SanalPOS_ID>
+<Kredi_Karti_Banka>Diğer Banka Kartları</Kredi_Karti_Banka>
+<Kredi_Karti_Banka_Gorsel>https://param.com.tr/images/banka/
+diger_kredi_kart.png</Kredi_Karti_Banka_Gorsel>
+<MO_01>1.7500</MO_01>
+<MO_02>-2.0000</MO_02>
+<MO_03>-2.0000</MO_03>
+<MO_04>-2.0000</MO_04>
+<MO_05>-2.0000</MO_05>
+<MO_06>-2.0000</MO_06>
+<MO_07>-2.0000</MO_07>
+<MO_08>-2.0000</MO_08>
+<MO_09>-2.0000</MO_09>
+</DT_Ozel_Oranlar_SK>
+...
+</DT_Bilgi>
+<Sonuc>1</Sonuc>
+<Sonuc_Str>Başarılı</Sonuc_Str>
+```
+
+###### 5. 3. TP_Ozel_Oran_SK_Guncelle
+
+```
+Üye işyerinin, Firma tarafından verilen komisyon oranlarından daha düşük
+```
+```
+bir oranı müşterisine göstermesi içindir. Bu komisyon oranı firmanın üye
+```
+```
+işyerine verdiği komisyon oranına küçük eşit olabilir. İki komisyon oranı
+```
+```
+arasındaki fark “0” dan büyükse, bu farkı üye işyeri karşılar.
+```
+```
+(Örn. Madde 5.2, 2.paragraf)
+```
+```
+Tüm parametreler zorunludur. Komisyon oranının aynı kalması istenen taksit
+```
+```
+parametresi için “100” değeri gönderilir. Herhangi bir taksit seçeneği
+```
+```
+kullanılmasın isteniyorsa “-1” gönderilir. Herhangi bir taksit oranı - 1 veya - 2
+```
+```
+ise diğer bir deyişle “0” dan küçük olduğu durumlarda bu taksit seçeneği o
+```
+```
+kart markası için kullanılamaz demektir.
+```
+```
+Oranları virgüllü gönderiniz. Örn. 1,25 gibi
+```
+```
+Gönderilecek Parametreler:
+```
+```
+Parametre Tip U Açıklama
+G NS ST_WS_Guvenlik Nesnesi
+```
+```
+Ozel_Oran_SK_ID L - Ozel_Oran_SK_Listeden dönen^ ID
+değeri
+GUID N 36 Üye İşyerine ait Anahtar
+MO_1 N - Tek Çekim Oranı
+MO_2 N - 2. Taksit Oranı
+MO_3 N - 3. Taksit Oranı
+MO_4 N - 4. Taksit Oranı
+MO_5 N - 5. Taksit Oranı
+MO_6 N - 6. Taksit Oranı
+MO_7 N - 7. Taksit Oranı
+MO_8 N - 8. Taksit Oranı
+MO_9 N - 9. Taksit Oranı
+MO_10 N - 10. Taksit Oranı
+MO_11 N - 11. Taksit Oranı
+MO_12 N - 12. Taksit Oranı
+```
+
+```
+Sonuç Parametreleri:
+```
+```
+Parametre Tip U Açıklama
+Sonuc N - İşlem sonucu
+Sonuc_Str N - İşlem sonuç açıklama
+```
+```
+Örnek Sonuç Parametreleri:
+```
+###### 5 .4. Ödeme Metotları
+
+###### 5.4.1. TP_Islem_Odeme
+
+```
+Ödeme işleminin başlatılacağı metottur. İşlem sonucu dönen 3D URL sine
+```
+```
+yönlendirme yapılır ve kredi kartı ile ödeme işlemi başlar.
+```
+```
+Test işlemi için Kredi kartı bilgileri:
+```
+```
+Kart No:444444444444 4444
+```
+```
+Son Kullanma Tarihi Ay Gün : 04 20
+```
+```
+CVV : 444 giriniz.
+```
+```
+İşlem Hash Değeri Hesaplama:
+```
+```
+Bu servisin SHA2B64 metodu, parametresine gönderdiğiniz değer
+```
+```
+sonucunda, bu değeri hashleyip Base64String e çevirir. Aşağıdaki örnekte
+```
+```
+olduğu gibi, bu parametreleri yazılım dilinize uygun string birleştirme yöntemi
+```
+```
+kullanarak birleştiriniz ve SHA2B64 metoduna gönderiniz. Elde ettiğiniz
+```
+```
+sonuç Islem_Hash değeridir. Islem_Hash’i oluşturacak parametre
+```
+```
+formatlarını, Gönderilecek Parametreler tablosuna bakarak oluşturunuz.
+```
+```
+(Islem_Tutar’ın virgüllü olması gibi)
+```
+```
+Dim Islem_Guvenlik_Str$ = CLIENT_CODE & GUID & SanalPOS_ID & Taksit &
+Islem_Tutar & Toplam_Tutar & Siparis_ID & Hata_URL & Basarili_URL
+```
+```
+<ST_Sonuc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns="https://turkpos.com.tr/">
+<Sonuc>1</Sonuc>
+<Sonuc_Str>İşlem Başarılı</Sonuc_Str>
+</ST_Sonuc>
+```
+
+Dim Islem_Hash$ = SHA2B64(Islem_Guvenlik_Str)
+
+**Komisyon Dahil Sipariş Tutarı Hesaplama**
+
+Komisyon Oran: **TP_Ozel_Oran_SK_Liste** metodundan seçilen taksitin
+
+komisyon oranı
+
+Islem_Tutar: Siparişinizin tutarı
+
+**Toplam_Tutar = Islem_Tutar + ((Islem_Tutar x Komisyon Oran) / 100)**
+
+şeklindedir.
+
+_Gönderilecek Parametreler:_
+
+```
+Parametre Tip U Açıklama
+G NS ST_WS_Guvenlik Nesnesi
+```
+```
+SanalPOS_ID I 4
+```
+```
+TP_Ozel_Oran_SK_Liste metodundan
+müşteriye seçtirilen Kart Markasının
+SanalPOS_ID değeri
+GUID N 36 Üye İşyerine ait Anahtar
+KK_Sahibi N 100 Kredi Kartı Sahibi
+KK_No N 16 Kredi Kartı numarası
+KK_SK_Ay N 2 2 hane Son Kullanma Ay
+KK_SK_Yil N 4 4 haneli Son Kullanma Yıl
+KK_CVC N 3 CVC Kodu
+```
+```
+KK_Sahibi_GSM N 10
+```
+```
+Kredi Kartı Sahibi GSM No, Başında 0
+olmadan (5xxxxxxxxx)
+```
+```
+Hata_URL N 256 Ödeme işlemi başarısız^ olursa
+yönlenecek sayfa adresi
+```
+```
+Basarili_URL N 256
+```
+```
+Ödeme işlemi başarılı olursa
+yönlenecek sayfa adresi
+```
+```
+Siparis_ID N 50
+```
+```
+Siparişe özel tekil ID. Bu değeri daha
+önce gönderdiyseniz sistem yeni
+Siparis_ID atar. İşlem sonucunda bu
+Siparis_ID yi döner.
+Siparis_Aciklama N 250 Siparişe ait açıklama
+```
+```
+Taksit I 2 Seçilen Taksit Sayısı. Tek çekim için 1
+gönderiniz.
+```
+```
+Islem_Tutar N -
+```
+```
+Sipariş Tutarı, (sadece virgüllü kuruş
+formatında 1000,50)
+```
+```
+Toplam_Tutar N -
+```
+```
+Komisyon Dahil Sipariş Tutarı,
+(sadece virgüllü kuruş formatında
+1000,50)
+Islem_Hash N - İşlem Hash Değeri
+```
+```
+Islem_ID N -
+```
+```
+İşleme ait Sipariş ID haricinde tekil
+ID, opsiyoneldir.
+```
+
+```
+IPAdr N 50 IP Adresi
+```
+```
+Ref_URL N 256
+```
+```
+Ödemenin gerçekleştiği sayfanın
+URLsi
+Data1 N 250 Extra Alan 1
+Data2 N 250 Extra Alan 2
+Data3 N 250 Extra Alan 3
+Data4 N 250 Extra Alan 4
+Data5 N 250 Extra Alan 5
+```
+_Sonuç Parametreleri:_
+
+```
+Parametre Tip U Açıklama
+Sonuc N - İşlem sonucu
+Sonuc_Str N - İşlem sonuç açıklama
+Islem_ID L - SID Değeri
+UCD_URL N - 3D URL si
+```
+_Örnek Sonuç Parametreleri:_
+
+ST_TP_Islem_Odeme nesnesinden alacağınız Sonuc parametresi “0” dan
+
+büyükse, **3D Güvenli Ödeme işlemini** başlatmak için UCD_URL
+
+parametresine yönlendirme yapınız. Kredi kartı ile ödeme işleminin başarılı
+
+veya başarısız olma durumunda Hata_URL veya Basarili_URL değerlerine
+
+POST sağlanır.
+
+```
+<ST_TP_Islem_Odeme xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns="https://turkpos.com.tr/">
+<Islem_ID>1000611272</Islem_ID>
+<UCD_URL>https://turkodeme.com.tr/Tahsilat/3D_Secure/
+AkilliKart_3DPay_VKF. aspx?rURL=TURKPOS_3D_TRAN&SID= 1
+</UCD_URL>
+<Sonuc>1</Sonuc>
+<Sonuc_Str>İşlem Başarılı</Sonuc_Str>
+</ST_TP_Islem_Odeme>
+```
+
+_POST Parametreleri:_
+
+```
+Parametre Açıklama
+TURKPOS_RETVAL_Sonuc Sonuç değeri
+TURKPOS_RETVAL_Sonuc_Str Sonuç açıklaması
+TURKPOS_RETVAL_GUID Üye İşyeri ait anahtarı
+TURKPOS_RETVAL_Islem_Tarih İşlem Tarihi
+TURKPOS_RETVAL_Dekont_ID Dekont Numarası
+TURKPOS_RETVAL_Tahsilat_Tutari Müşteriden tahsil edilen tutar
+```
+```
+TURKPOS_RETVAL_Odeme_Tutari
+```
+```
+Net tutar. Tahsilat tutarından komisyon
+tutarının çıkarılmış halidir.
+```
+```
+TURKPOS_RETVAL_Siparis_ID Servise gönderdiğiniz işleme ait tekil
+Siparis_ID
+TURKPOS_RETVAL_Islem_ID Servise gönderdiğiniz Islem_ID
+```
+```
+TURKPOS_RETVAL_Ext_Data
+```
+```
+Metottaki Data1, Data2, Data3, Data4,
+Data5 parametrelerinin “|” ile birleştirilmiş
+hali döner.
+Ext_Data = Data1 & "|" & Data2 & "|" &
+Data3 & "|" & Data4 & "|" & Data
+```
+TURKPOS_RETVAL_Sonuc < 0 ise TURKPOS_RETVAL_Dekont_ID “0” döner.
+
+TURKPOS_RETVAL_Dekont_ID değeri “0” dan büyük olduğu durumlarda kredi
+
+kartından çekim işlemi tamamlanmış anlamına gelir.
+
+###### 5.4.2. KK_Saklama
+
+Kredi kartı saklama işleminin yapıldığı metottur. **TP_Islem_Odeme_WKS**
+
+metodu için KK_GUID değeri döner.
+
+_Gönderilecek Parametreler:_
+
+```
+Parametre Tip U Açıklama
+G NS ST_WS_Guvenlik Nesnesi
+Kart_No N 16 Üye İşyerine ait Kart No
+KK_Sahibi N 100 Kredi Kartı Sahibi
+KK_No N 16 Kredi Kartı numarası
+KK_SK_Ay N 2 2 hane Son Kullanma Ay
+KK_SK_Yil N 4 4 haneli Son Kullanma Yıl
+KK_CVC N 3 CVC Kodu
+```
+
+```
+Data1 N 250 Extra Alan 1, Opsiyonel
+Data2 N 250 Extra Alan 2, Opsiyonel
+Data3 N 250 Extra Alan 3, Opsiyonel
+```
+_Sonuç Parametreleri:_
+
+```
+Parametre Tip U Açıklama
+Sonuc N - İşlem sonucu
+Sonuc_Str N - İşlem sonuç açıklama
+GUID N - Kart Saklama Tekil GUID değeri
+```
+###### 5.4.3. KK_Sakli_Liste
+
+Saklı kartların listelendiği metottur.
+
+_Gönderilecek Parametreler:_
+
+```
+Parametre Tip U Açıklama
+G NS ST_WS_Guvenlik Nesnesi
+Kart_No N 16 Üye İşyeri Kart No
+```
+```
+KS_KK_Kisi_ID N 11
+```
+```
+Kartı saklanacak kişinin T.C Kimlik
+numarası veya kişiye ait 11 haneli
+tekil değer. Opsiyoneldir.
+```
+_Sonuç Parametreleri:_
+
+```
+Parametre Tip U Açıklama
+Sonuc N - İşlem sonucu
+Sonuc_Str N - İşlem sonuç açıklama
+ID N - Kart Saklama ID si
+KK_GUID N - Kart Saklama GUID değeri
+Tarih N - Saklama Tarihi
+KK_No N - Kredi Kartı BIN Kodu
+KK_Tip N - Kart Tipi
+KK_Banka N - Kart Bankası
+KK_Marka N - Kart Markası
+```
+
+###### 5.4. 4. TP_Islem_Odeme_WKS
+
+Kart saklamalı ödeme işleminin başlatılacağı metottur. İşlem sonucu dönen
+
+3D URL sine yönlendirme yapılır ve kredi kartı ile ödeme işlemi başlar.
+
+TP_Islem_Odeme metodundaki açıklamalar geçerli olmak kaydıyla
+
+_Gönderilecek Parametreler:_
+
+```
+Parametre Tip U Açıklama
+G NS ST_WS_Guvenlik Nesnesi
+```
+```
+SanalPOS_ID I 4
+```
+```
+TP_Ozel_Oran_SK_Liste metodundan
+müşteriye seçtirilen Kart Markasının
+SanalPOS_ID değeri
+GUID N 36 Üye İşyerine ait Anahtar
+KS_Kart_No N 100 Üye İşyeri Kart No
+```
+```
+KK_GUID N 16
+```
+```
+KK_Saklama metodundan dönen
+GUID değeri
+```
+```
+KK_Sahibi_GSM N 10
+```
+```
+Kredi Kartı Sahibi GSM No, Başında 0
+olmadan (5xxxxxxxxx)
+```
+```
+Hata_URL N 250 Ödeme işlemi başarısız^ olursa
+yönlenecek sayfa adresi
+```
+```
+Basarili_URL N 250
+```
+```
+Ödeme işlemi başarılı olursa
+yönlenecek sayfa adresi
+```
+```
+Siparis_ID N -
+```
+```
+Siparişe özel tekil ID. Bu değeri daha
+önce gönderdiyseniz sistem yeni
+Siparis_ID atar. İşlem sonucunda bu
+Siparis_ID yi döner.
+Siparis_Aciklama N 250 Siparişe ait açıklama
+```
+```
+Taksit I 2 Seçilen Taksit Sayısı. Tek çekim için 1
+gönderiniz.
+```
+```
+Islem_Tutar N -
+```
+```
+Sipariş Tutarı, (sadece virgüllü kuruş
+formatında 1000,50)
+```
+```
+Toplam_Tutar N -
+```
+```
+Komisyon Dahil Sipariş Tutarı,
+(sadece virgüllü kuruş formatında
+1000,50)
+Islem_Hash N - İşlem Hash Değeri
+Islem_Guvenlik_Tip N 2 NS (NonSecure) veya 3D gönderilir.
+```
+```
+Islem_ID N -
+```
+```
+İşleme ait Sipariş ID haricinde tekil
+ID, opsiyoneldir.
+IPAdr N 50 IP Adresi
+```
+```
+Ref_URL N 256 Ödemenin gerçekleştiği sayfanın
+URLsi
+Data1 N 250 Extra Alan 1
+Data2 N 250 Extra Alan 2
+Data3 N 250 Extra Alan 3
+```
+
+```
+Data4 N 250 Extra Alan 4
+Data5 N 250 Extra Alan 5
+```
+_Sonuç Parametreleri:_
+
+```
+Parametre Tip U Açıklama
+Sonuc N - İşlem sonucu
+Sonuc_Str N - İşlem sonuç açıklama
+Islem_ID L - SID Değeri
+UCD_URL N - 3D URL si
+```
+_Örnek Sonuç Parametreleri: 3D li işlemler için_
+
+ST_TP_Islem_Odeme_WKS nesnesinden alacağınız Sonuc parametresi “0” dan
+
+büyükse, **3D Güvenli Ödeme işlemini** başlatmak için UCD_URL
+
+parametresine yönlendirme yapınız. Kredi kartı ile ödeme işleminin başarılı
+
+veya başarısız olma durumunda Hata_URL veya Basarili_URL değerlerine
+
+POST sağlanır.
+
+_POST Parametreleri:_
+
+```
+Parametre Açıklama
+TURKPOS_RETVAL_Sonuc Sonuç değeri
+TURKPOS_RETVAL_Sonuc_Str Sonuç açıklaması
+TURKPOS_RETVAL_GUID Üye İşyeri ait anahtarı
+TURKPOS_RETVAL_Islem_Tarih İşlem Tarihi
+TURKPOS_RETVAL_Dekont_ID Dekont Numarası
+TURKPOS_RETVAL_Tahsilat_Tutari Müşteriden tahsil edilen tutar
+```
+```
+TURKPOS_RETVAL_Odeme_Tutari
+```
+```
+Net tutar. Tahsilat tutarından komisyon
+tutarının çıkarılmış halidir.
+TURKPOS_RETVAL_Siparis_ID Servise gönderdiğiniz işleme ait tekil
+```
+```
+<ST_TP_Islem_Odeme xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns="https://turkpos.com.tr/">
+<Islem_ID>1000611272</Islem_ID>
+<UCD_URL>https://turkodeme.com.tr/Tahsilat/3D_Secure/
+AkilliKart_3DPay_VKF. aspx?rURL=TURKPOS_3D_TRAN&SID= 1
+</UCD_URL>
+<Sonuc>1</Sonuc>
+<Sonuc_Str>İşlem Başarılı</Sonuc_Str>
+</ST_TP_Islem_Odeme>
+```
+
+```
+Siparis_ID
+TURKPOS_RETVAL_Islem_ID Servise gönderdiğiniz Islem_ID
+```
+```
+TURKPOS_RETVAL_Ext_Data
+```
+```
+Metottaki Data1, Data2, Data3, Data4,
+Data5 parametrelerinin “|” ile birleştirilmiş
+hali döner.
+Ext_Data = Data1 & "|" & Data2 & "|" &
+Data3 & "|" & Data4 & "|" & Data
+```
+```
+TURKPOS_RETVAL_Sonuc < 0 ise TURKPOS_RETVAL_Dekont_ID “0” döner.
+```
+```
+TURKPOS_RETVAL_Dekont_ID değeri “0” dan büyük olduğu durumlarda kredi
+```
+```
+kartından çekim işlemi tamamlanmış anlamına gelir.
+```
+```
+Örnek Sonuç Parametreleri: NonSecure işlemler için
+```
+```
+Sonuc > 0 ise UCD_URL nin 'NONSECURE' eşitliği aranır. Eğer eşitse İşlem
+```
+```
+sonlanır. Islem_ID değeri Dekont No değeridir.
+```
+```
+Başarılı bir NonSecure işlemi için, Sonuc > 0, Islem_ID > 0 ve
+```
+```
+UCD_URL='NONSECURE' olmalıdır. Aksi durumda işlem başarısızdır.
+```
+```
+NONSECURE işlemin hatalı olması durumunda Sonuc_Str değer bankadan
+```
+```
+gelen hata mesajını döner.
+```
+```
+Eğer UCD_URL <> 'NONSECURE' ise 3D işlemi gibi ele alınır.
+```
+###### 5. 5. TP_Islem_Sorgulama
+
+```
+İşlemin başarılı, başarısız, iptal veya iade durumunda olduğunu
+```
+```
+öğrenebilirsiniz.
+```
+```
+TP_Islem_Odeme metodu sonrasında, kredi kartı 3D şifre bilgilerinin
+```
+```
+girilmesinin ardından işlemin başarılı veya başarısız olma durumuna göre,
+```
+```
+Basarili_URL veya Hata_URL’ye POST sırasında bir hata oluştuğunda da bu
+```
+```
+<ST_TP_Islem_Odeme>
+<Islem_ID>1013521904</Islem_ID>
+<UCD_URL>NONSECURE</UCD_URL>
+<Sonuc>1</Sonuc>
+<Sonuc_Str>İşlem Başarılı</Sonuc_Str>
+</ST_TP_Islem_Odeme>
+```
+
+metot ile işlemin durumunu sorgulayabilirsiniz.
+
+_Gönderilecek Parametreler:_
+
+```
+Parametre Tip U Açıklama
+G NS - ST_WS_Guvenlik Nesnesi
+GUID N 36 Üye İşyerine ait Anahtar
+```
+```
+Dekont_ID L -
+```
+```
+Başarılı işlem sonrası POST edilen
+Dekont_ID, opsiyoneldir.
+```
+```
+Siparis_ID N -
+```
+```
+Başarılı işlem sonrası POST edilen
+Sipariş ID
+```
+```
+Islem_ID N -
+```
+```
+TP_Islem_Odeme metoduna
+gönderilen İşlem ID, opsiyoneldir.
+```
+Dekont_ID, Siparis_ID ve Islem_ID değerlerinden herhangi birini göndererek
+
+işlem durumunu sorgulayabilrisiniz. Burada sadece Islem_ID ile sorgulama
+
+yapmak isterseniz, siparişlerinizde tekil Islem_ID gönderdiğinize emin
+
+olunuz.
+
+_Sonuç Parametreleri:_
+
+```
+Parametre Tip U Açıklama
+Sonuc N - İşlem sonucu
+Sonuc_Str N - İşlem sonuç açıklama
+Odeme_Sonuc N - Ödeme sonucu
+Odeme_Sonuc_Aciklama N - Ödeme sonuç açıklama
+```
+```
+Dekont_ID L -
+```
+```
+Dekont Bilgisi, Başarısız ise “0” döner,
+başarılı ise “0” dan büyük döner.
+Siparis_ID N - Sipariş ID
+Islem_ID N - Metoda gönderilen Islem_ID si
+Toplam_Tutar M - Komisyon dahil Sipariş tutarı
+Taksit I 2 Taksit bilgisi
+```
+```
+Ext_Data N -
+```
+```
+Ödeme Metodundaki Data1, Data2,
+Data3, Data4, Data5 alanlarının “|” ile
+birleştirilmiş hali döner.
+```
+
+```
+Örnek Sonuç Parametreleri:
+```
+###### 5. 6. TP_Mutabakat_Ozet
+
+```
+Belirli tarihleri arasındaki üye işyerinin işlemleri özet biçiminde alabilirsiniz.
+```
+```
+Gönderilecek Parametreler:
+```
+```
+Parametre Tip U Açıklama
+G NS - ST_WS_Guvenlik Nesnesi
+GUID N 36 Üye İşyerine ait Anahtar
+```
+```
+Tarih_Bas N 20 Başlangıç Tarihi (dd.MM.yyyy
+HH:mm:ss – 20.11.2015 00:00:00)
+```
+```
+Tarih_Bit N 20
+```
+```
+Bitiş Tarihi (dd.MM.yyyy HH:mm:ss –
+20.11.2015 15:15:00)
+```
+```
+Sonuç Parametreleri:
+```
+```
+Parametre Tip U Açıklama
+Sonuc N - İşlem sonucu
+Sonuc_Str N - İşlem sonuç açıklama
+Basarili_Islem_Sayi I - Başarılı işlem sayısı
+Basarili_Islem_Toplam_Tutar M - Başarılı işlem toplam tutarı
+Iptal_Islem_Sayi I - İptal işlem sayısı
+Iptal_Islem_Toplam_Tutar M - İptal işlem toplam tutarı
+Iade_Islem_Sayi I - İade işlem sayısı
+Iade_Islem_Toplam_Tutar M - İade işlem toplam tutarı
+```
+```
+<DT_Bilgi>
+<DT_Islem_Sorgulama diffgr:id="DT_Islem_Sorgulama1" msdata:rowOrder="0">
+<Odeme_Sonuc>1</Odeme_Sonuc>
+<Odeme_Sonuc_Aciklama>İşlem Başarılı</Odeme_Sonuc_Aciklama>
+<Tarih>17.11.2015 14:49:19</Tarih>
+<Dekont_ID>1009834621</Dekont_ID>
+<Siparis_ID />
+<Islem_ID />
+<Komisyon_Oran>1.7500</Komisyon_Oran>
+<Komisyon_Tutar>1.7500</Komisyon_Tutar>
+<Toplam_Tutar>1.0000</Toplam_Tutar>
+<Taksit>1</Taksit>
+<Ext_Data>||||</Ext_Data>
+</DT_Islem_Sorgulama>
+</DT_Bilgi>
+<Sonuc>1</Sonuc>
+<Sonuc_Str>Başarılı</Sonuc_Str>
+```
+
+```
+Örnek Sonuç Parametreleri:
+```
+###### 5. 7. TP_Islem_Iptal_Iade_Kismi
+
+```
+Başarılı bir kredi kartı işleminin iptal veya iadesini yapmak için kullanılır.
+```
+```
+Gönderilecek Parametreler:
+```
+```
+Parametre Tip U Açıklama
+G NS - ST_WS_Guvenlik Nesnesi
+GUID N 36 Üye İşyerine ait Anahtar
+```
+```
+Durum N 10
+```
+```
+İptal için IPTAL
+İade için IADE
+Dekont_ID L - İşlemin Dekont ID si
+```
+```
+Tutar M -
+```
+```
+İptal/İade Tutarı, IPTAL için tüm tutar
+yazılmalıdır. IADE için tüm tutar veya
+daha küçük tutar (kısmi) yazılmalıdır.
+```
+```
+Sonuç Parametreleri:
+```
+```
+Parametre Tip U Açıklama
+Sonuc N - İşlem sonucu
+Sonuc_Str N - İşlem sonuç açıklama
+```
+###### Örnek Sonuç Parametreleri
+
+###### 5. 8. TP_Islem_Dekont_Gonder
+
+```
+Dekontun eposta olarak gönderilmesini sağlar.
+```
+```
+<DT_Bilgi>
+<DT_Mutabakat_Ozet diffgr:id="DT_Mutabakat_Ozet1" msdata:rowOrder="0">
+<Basarili_Islem_Sayi>0</Basarili_Islem_Sayi>
+<Basarili_Islem_Toplam_Tutar>0.0000</Basarili_Islem_Toplam_Tutar>
+<Iptal_Islem_Sayi>0</Iptal_Islem_Sayi>
+<Iptal_Islem_Toplam_Tutar>0.0000</Iptal_Islem_Toplam_Tutar>
+<Iade_Islem_Sayi>0</Iade_Islem_Sayi>
+<Iade_Islem_Toplam_Tutar>0.0000</Iade_Islem_Toplam_Tutar>
+</DT_Mutabakat_Ozet>
+</DT_Bilgi>
+<Sonuc>1</Sonuc>
+<Sonuc_Str>Başarılı</Sonuc_Str>
+```
+```
+<ST_Sonuc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns="https://turkpos.com.tr/">
+<Sonuc>1</Sonuc>
+<Sonuc_Str>İşlem Başarılı</Sonuc_Str>
+</ST_Sonuc>
+```
+
+```
+Gönderilecek Parametreler:
+```
+```
+Parametre Tip U Açıklama
+G NS - ST_WS_Guvenlik Nesnesi
+GUID N 36 Üye İşyerine ait Anahtar
+Dekont_ID L - İşlemin Dekont ID si
+E_Posta N 100 Kişi e-posta adresi
+```
+```
+Sonuç Parametreleri:
+```
+```
+Parametre Tip U Açıklama
+Sonuc N - İşlem sonucu
+Sonuc_Str N - İşlem sonuç açıklama
+```
+###### 5. 9. SHA2B
+
+```
+Şifreli veri üretmek için kullanılır.
+```
+```
+Gönderilecek Parametreler:
+```
+```
+Parametre Tip U Açıklama
+Data N - Şifrelenecek Veri
+```
+```
+Sonuç Parametreleri:
+```
+```
+Parametre Tip U Açıklama
+Sonuc N - İşlem sonucu^
+```
+###### 5. 10. BIN_SanalPos
+
+```
+Sistemde kayıtlı bin kodlarını ve işlem yapılabilecek SanalPOS_ID bilgisini
+```
+```
+öğrenebilirsiniz. Bilgilendirme amaçlıdır.
+```
+```
+Gönderilecek Parametreler:
+```
+```
+Parametre Tip U Açıklama
+G NS - ST_WS_Guvenlik Nesnesi
+```
+```
+BIN N 6
+```
+```
+Boş bırakılırsa tüm BIN kodları
+döner. Dolu gönderilişe o BIN
+```
+
+```
+koduna ait bilgiler döner.
+```
+```
+Sonuç Parametreleri:
+```
+```
+Parametre Tip U Açıklama
+Sonuc N - İşlem sonucu
+BIN N - Kredi Kartı BIN kodu
+Kart_Banka N - Kredi Kartı Bankası
+```
+```
+DKK I -
+```
+```
+1 ise Diğer Kredi Kartı SanalPos_ID si
+kullanılır
+0 ise BIN, Sanal POS uyumu var. Kart
+markasına ait SanalPOS_ID den çekim
+yapılır.
+```
+##### 6. HATA KODLARI
+
+```
+Servislere gerçek ortamda HTTPS protokolü üzerinden erişilecektir. İşlemlerin
+```
+```
+gerçekleşmesi için kurum internet çıkış IP adresi veya IP Blokları, web sitesi
+```
+```
+adresi iletilmeli ve tarafımızdan gerekli tanımlar yapılmalıdır.
+```
+```
+Kodu Açıklama
+1 Başarılı
+```
+- 1 Başarısız
 
 
-### Todos
+- 100 Hesap bulunamadı.
+- 101 Güvenlik hatası.
+- 102 İşlem Hash geçersiz.
+- 103 GUID uzunluğu geçersiz.
+- 104 Siparis_ID en fazla 36 karakter olabilir.
+- 105 Kredi kartı CVV uzunluğu geçersiz. 3 hane olmalıdır.
+- 106 Kredi kartı yıl uzunluğu geçersiz.
+- 107 Kredi kartı son kullanma ay uzunluğu geçersiz.
+- 108 Müşteri GSM no geçersiz.
+- 109 SanalPOS_ID uzunluğu geçersiz.
+- 110 Taksit geçersiz.
+- 111 IP formatı geçersiz.
+- 112
 
- - Write MORE Tests
- - Add Night Mode
+```
+Tutar formatı geçersiz. Nokta kullanmayınız. Kuruş formatında virgüllü
+gönderiniz.
+```
+- 113 Tutar, 0 dan küçük veya eşit olmamalıdır.
+- 114 Test kullanıcısı ile işlem yapılamaz.
+- 115 Tutar formatı geçersiz. Virgülden sonra 2 basamak şeklinde olmalıdır.
+- 116 Başarılı URL veya Hata URL boş olamaz.
+- 117 GSM No numeric olmalıdır.
+- 118 Kredi Kartı No uzunluğu geçersiz.
+- 119 Kredi Kart No formatı hatalı.
+- 120 Tarih formatı hatalı.
+- 121 Kredi Kartı sahibi bilgisini eksiksiz giriniz.
+- 200 Komisyon bilgisi bulunamadı.
+- 201 SanalPOS_ID ye ait taksit geçersiz.
+- 202 Toplam tutara eklenen komisyon hatalı.
+- 203 Kesilecek komisyon bilgisi hesaplanırken hata oluştu.
+- 204 SanalPOS Tipi hatalı.
+- 205 Ödeme bilgileri kayıt edilirken hata oluştu. İşlemi tekrarlayınız.
+- 206 Sanal POS İşlemi kaydedilemedi.
+- 207 Sistem Hatası
+- 208 SanalPOS Tipi veya Kart No bulunamadı.
+- 209 İşlem bilgisi bulunamadı.
+- 210 İptal/İadeye uygun işlem bulunamadı.
+- 211 İşlem iptal durumunda.
+- 212 İşlem iade durumunda.
+- 213 İade olabilecek işlem İptal edilmek isteniyor.
+- 214 İptal olabilecek işlem İade edilmek isteniyor.
+- 215
 
-License
-----
+```
+SanalPOS_ID ile Kredi Kartı BIN kodu uyumsuz. Kredi Kartı markasına göre
+yanlış SanalPOS_ID seçiliyor.
+```
 
-MIT
+- 216 GUID ile Güvenlik nesnesi eşleşmiyor.
+- 217 İptal veya İade edilecek Tutar, işlem tutarından büyük olamaz.
+- 218 İptal edilecek işlemin için Tutar hatalı.
+- 219 Durum parametresi boş olamaz. IPTAL veya IADE gönderiniz.
+- 220 Debit Kart ile taksitli işlem yapılamaz.
+- 221 İade Tutarı, İade Edilebilir Tutar’dan büyük olamaz.
+- 222 Tarih aralığı 7 günden fazla olamaz.
+- 223 Test kredi kartı ile gerçek ortamda işlem yapılamaz.
+- 300 Kart saklama yapılamadı.
+- 301 Kart çözümleme başarısız.
+
+##### 7. GÜVENLİK
+
+```
+Servislere gerçek ortamda HTTPS protokolü üzerinden erişilecektir. İşlemlerin
+```
+```
+gerçekleşmesi için kurum internet çıkış IP adresi veya IP Blokları, web sitesi
+```
+```
+adresi iletilmeli ve tarafımızdan gerekli tanımlar yapılmalıdır.
+```
 
 
-**Free Software, Hell Yeah!**
-
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
-
-
-   [dill]: <https://github.com/joemccann/dillinger>
-   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
-   [john gruber]: <http://daringfireball.net>
-   [df1]: <http://daringfireball.net/projects/markdown/>
-   [markdown-it]: <https://github.com/markdown-it/markdown-it>
-   [Ace Editor]: <http://ace.ajax.org>
-   [node.js]: <http://nodejs.org>
-   [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
-   [jQuery]: <http://jquery.com>
-   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
-   [express]: <http://expressjs.com>
-   [AngularJS]: <http://angularjs.org>
-   [Gulp]: <http://gulpjs.com>
-
-   [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
-   [PlGh]: <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>
-   [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
-   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
-   [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
-   [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
