@@ -1,5 +1,5 @@
 # Turkpos php sanal pos entegresi
-
+# Destek dılo sürücü <berxudar@gmail.com>
 [![Dılo sürücü](https://www.dokuzyazilim.com/u/dokuzyazilim/news/a/turkpos-logo-1477473837.png)](https://github.com/diloabininyeri)
 
 
@@ -397,7 +397,7 @@ print_r($res);
 ```
 
 
-* ###Bin Sanal pos
+ ###Bin Sanal pos
 
 örnek  kullanım
 ```
@@ -594,6 +594,61 @@ print_r($res);
 
 ```
 
+### TpDekontIslem
+
+TpDekontIslem sınıfının örnek kullanımı
+
+```
+use Turkpos\Soap;
+use Turkpos\BuilderObject\TpDekontIslem;
+use Turkpos\Config;
+
+
+Config::$CLIENT_CODE = 10738;
+Config::$CLIENT_USERNAME = 'test';
+Config::$CLIENT_PASSWORD = 'test';
+Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl';
+
+
+$tpDekontIslem=new TpDekontIslem($dekonId,$eposta,$ipAddr);
+$soap=new Soap($tpDekontIslem);
+$res=$soap->send($tpDekontIslem)->getSoapResultMethod();
+
+
+print_r($res);
+
+
+
+```
+
+
+### TpDekontIslemGonder
+
+TpDekontIslemGonder sınıfının örnek kullanımı
+
+
+```
+use Turkpos\Soap;
+use Turkpos\BuilderObject\TpDekontIslemGonder;
+use Turkpos\Config;
+
+
+Config::$CLIENT_CODE = 10738;
+Config::$CLIENT_USERNAME = 'test';
+Config::$CLIENT_PASSWORD = 'test';
+Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl';
+
+
+
+$soap = new Soap();
+$tpDekontIslemGonder = new TpDekontIslemGonder($guid, $dekontId, $eposta);
+$res = $soap->send($tpDekontIslemGonder)->getSoapResultMethod();
+
+
+
+print_r($eposta);
+
+```
 
 #### AYINTILI DOKUMAN
 ### TURK ELEKTRONİK PARA A.Ş
