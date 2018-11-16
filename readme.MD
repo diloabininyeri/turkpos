@@ -315,6 +315,126 @@ Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.
 
 
 ```
+
+
+
+###Ödeme yapma 
+
+Ödeme işlemleri Odeme sınıfı ile yapılmaktadır,Odeme sınıfı başarılı olması durumunda sonuç olarak aşağıdaki gibi bir çıktı üretir
+
+````
+            [Islem_ID] => 1005454853
+            [UCD_URL] => https://pos.param.com.tr/Tahsilat/3D_Secure/AkilliKart_3DPay_EST.aspx?rURL=TURKPOS_3D_TRAN&SID=1005454853
+            [Sonuc] => 1
+            [Sonuc_Str] => İşlem Başarılı.
+
+````
+
+UCD_URL keyini alıp yönlendirme yapılarak 3d secure ile sms doğrulaması yapılarak ödeme alınır ,Odeme sınıfının örnek kullanımı
+
+````
+use Turkpos\Config;
+use Turkpos\Soap;
+
+use Turkpos\BuilderObject\Odeme;
+
+Config::$CLIENT_CODE = 10738;
+
+Config::$CLIENT_USERNAME = 'test';
+
+Config::$CLIENT_PASSWORD = 'test';
+
+Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl';
+
+
+$soap = new Soap();
+
+
+$client = new SoapClient("https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl");
+$spid = 1011;
+$guid = '0c13d406-873b-403b-9c09-a5766840d98c';
+$kkSahibi = "Albert Einstein";
+$kkNo = "4444444444444444";
+$kkSkAy = "04";
+$kkSkYil = "2020";
+$kkCvc = "444";
+$kkSahibiGsm = "5340882563";
+$hataUrl = "http://localhost:1234/unsuccesfull.php";
+$basariliUrl = "http://localhost:1234/succesfull.php";
+$siparisId = "7";
+$odemeUrl = "http://localhost:1234/odeme.php";
+$siparisAciklama = "siparis aciklama";
+$taksit = 1;
+$islemtutar = "100,00";
+$toplamTutar = "102,45";
+$islemid = "";
+$ipAdr = "127.0.0.1";
+$dataBir = " ";
+$dataIki = " ";
+$dataUc = " ";
+$dataDort = " ";
+$dataBes = " ";
+
+
+$soap = new Soap();
+
+
+$nesne = new Odeme($spid, $guid, $kkSahibi, $kkNo, $kkSkAy, $kkSkYil, $kkCvc, $kkSahibiGsm,
+    $hataUrl, $basariliUrl, $siparisId, $siparisAciklama, $taksit, $islemtutar, $toplamTutar, $islemid, $ipAdr, $odemeUrl,
+    $dataBir, $dataIki, $dataUc, $dataDort, $dataBes);
+
+
+$res = $soap->send($nesne)->getSoapResultMethod();
+
+
+echo "<pre>";
+
+
+print_r($res);
+
+
+````
+
+
+###Bin Sanal pos
+
+örnek  kullanım
+```
+
+use Turkpos\Soap;
+use Turkpos\BuilderObject\BinSanalPos;
+use Turkpos\Config;
+
+
+
+
+Config::$CLIENT_CODE = 10738;
+
+Config::$CLIENT_USERNAME = 'test';
+
+Config::$CLIENT_PASSWORD = 'test';
+
+Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl';
+
+
+
+
+ $soap = new Soap();
+
+ $binsanal = new BinSanalPos();
+
+ $res = $soap->send($binsanal)->getSoapResultMethod();
+
+ echo '<pre>';
+ 
+ print_r($res);
+
+
+
+
+
+```
+
 #### AYINTILI DOKUMAN
 ### TURK ELEKTRONİK PARA A.Ş
 
