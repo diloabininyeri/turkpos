@@ -1,4 +1,4 @@
-# Turkpos php sanal pos entegresi
+# TURK Elektronik Para php sanal pos
 
 
 [![Dılo sürücü](https://www.dokuzyazilim.com/u/dokuzyazilim/news/a/turkpos-logo-1477473837.png)](https://github.com/diloabininyeri)
