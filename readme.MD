@@ -38,6 +38,13 @@ Sınıflarının kullanımı:
 
 ### Kurulumu
 
+```
+
+composer require zeus/turkpos
+
+
+```
+
 [composer](https://getcomposer.org/) destekli paket psr-4 autoload standartllarına göre
 yazıldı
 
