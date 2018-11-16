@@ -1,5 +1,5 @@
 # Turkpos php sanal pos entegresi
-# Destek dılo sürücü <berxudar@gmail.com>
+ 
 [![Dılo sürücü](https://www.dokuzyazilim.com/u/dokuzyazilim/news/a/turkpos-logo-1477473837.png)](https://github.com/diloabininyeri)
 
 
