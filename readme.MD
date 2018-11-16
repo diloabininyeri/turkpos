@@ -531,8 +531,35 @@ $soap = new Soap();
 $res = $soap->send($tpMutabakatOzel)->getSoapResultMethod();
 
 
+print_r($res);
+
 
 ```
+
+
+
+### TpIslemSorgulama
+
+TpIslemSorgulama sınıfı yapılan işlemi sorgulama işlemi yapar örnek kullanımı
+
+```
+use Turkpos\BuilderObject\TpIslemSorgulama;
+use Turkpos\Soap;
+use Turkpos\Config;
+
+
+
+$soap = new Soap();
+
+$tpIslemSorgulama = new TpIslemSorgulama($guid,$dekontId, $siparisId,$islemId);
+
+$res = $soap->send($tpIslemSorgulama)->getSoapResultMethod();
+
+print_r($res);
+
+
+```
+
 
 #### AYINTILI DOKUMAN
 ### TURK ELEKTRONİK PARA A.Ş
