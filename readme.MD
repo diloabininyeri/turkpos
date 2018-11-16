@@ -237,10 +237,11 @@ $soap=new Soap();
  
  örnek kullanım
  
- ````
+ ```
  $response=$soap->send($object)->getAnyData();
  
- ````
+ ``` 
+ 
  işlemin başarılı çıktısı örnek
  
  
@@ -318,21 +319,25 @@ Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.
 
 
 
-###Ödeme yapma 
+* ###Ödeme yapma 
 
 Ödeme işlemleri Odeme sınıfı ile yapılmaktadır,Odeme sınıfı başarılı olması durumunda sonuç olarak aşağıdaki gibi bir çıktı üretir
 
-````
+```
             [Islem_ID] => 1005454853
             [UCD_URL] => https://pos.param.com.tr/Tahsilat/3D_Secure/AkilliKart_3DPay_EST.aspx?rURL=TURKPOS_3D_TRAN&SID=1005454853
             [Sonuc] => 1
             [Sonuc_Str] => İşlem Başarılı.
 
-````
+```
+
+
+
+
 
 UCD_URL keyini alıp yönlendirme yapılarak 3d secure ile sms doğrulaması yapılarak ödeme alınır ,Odeme sınıfının örnek kullanımı
 
-````
+```
 use Turkpos\Config;
 use Turkpos\Soap;
 
@@ -348,9 +353,6 @@ Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.
 
 
 $soap = new Soap();
-
-
-$client = new SoapClient("https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl");
 $spid = 1011;
 $guid = '0c13d406-873b-403b-9c09-a5766840d98c';
 $kkSahibi = "Albert Einstein";
@@ -393,10 +395,10 @@ echo "<pre>";
 print_r($res);
 
 
-````
+```
 
 
-###Bin Sanal pos
+* ###Bin Sanal pos
 
 örnek  kullanım
 ```
