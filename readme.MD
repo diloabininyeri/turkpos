@@ -37,7 +37,7 @@ Sınıflarının kullanımı:
 
 ### Kurulumu
 
-[composer](https://nodejs.org/) destekli paket psr-4 autoload standartllarına göre
+[composer](https://getcomposer.org/) destekli paket psr-4 autoload standartllarına göre
 yazıldı
 
 Başlangıç
@@ -299,7 +299,6 @@ projede bir kere tanımlanıp her yerde kullanılabilir
 Config ayarları yapmak için gerekenler çok basit,her Turksanalpos işlemi için aşağıdaki işlemi configrationları yapmanız lazım
 Laravel gibi bir framewworkla çalışıyorsanız middleware ile sadece bir kere configation yaypıp tum controllerlara bind edebilirsiniz
 
-
 ```
 use Turkpos\Config;
 
@@ -318,7 +317,8 @@ Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.
 ```
 
 
- ### Ödeme yapma 
+
+### Odeme
 
 Ödeme işlemleri Odeme sınıfı ile yapılmaktadır,Odeme sınıfı başarılı olması durumunda sonuç olarak aşağıdaki gibi bir çıktı üretir
 
@@ -431,6 +431,104 @@ Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.
  print_r($res);
 
 
+
+
+
+```
+
+### TpOzelOranListele
+
+TpOzelOranListele sınıfının örnek kullanımı
+
+```
+use Turkpos\Soap;
+use Turkpos\BuilderObject\TpOzelOranListele;
+use Turkpos\Config;
+
+
+Config::$CLIENT_CODE = 10738;
+
+Config::$CLIENT_USERNAME = 'test';
+
+Config::$CLIENT_PASSWORD = 'test';
+
+Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl';
+
+
+
+
+
+$guid='0c13d406-873b-403b-9c09-a5766840d98c';
+
+$tpOzelOranListele = new TpOzelOranListele($guid);
+$soap = new Soap();
+$res = $soap->send($tpOzelOranListele)->getSoapResultMethod();
+
+
+print_r($res);
+
+
+```
+
+
+### TpOzelOranSkListe
+
+TpOzelOranSkListe sınıfının örnek kullanımı
+
+```
+use Turkpos\Soap;
+use Turkpos\BuilderObject\TpOzelOranSkListe;
+use Turkpos\Config;
+
+
+Config::$CLIENT_CODE = 10738;
+
+Config::$CLIENT_USERNAME = 'test';
+
+Config::$CLIENT_PASSWORD = 'test';
+
+Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl';
+
+
+
+
+$tpOzelOranSkListe = new TpOzelOranSkListe('0c13d406-873b-403b-9c09-a5766840d98c');
+$soap = new Soap();
+$res = $soap->send($tpOzelOranSkListe)->getSoapResultMethod();
+
+
+print_r($res);
+
+```
+
+
+
+### TpMutabakatOzel
+
+TpMutabakatOzel sınıfının örnek kullanımı
+
+```
+
+use Turkpos\BuilderObject\TpMutabakatOzel;
+use Turkpos\Config;
+use Turkpos\Soap;
+
+
+
+Config::$CLIENT_CODE = 10738;
+Config::$CLIENT_USERNAME = 'test';
+Config::$CLIENT_PASSWORD = 'test';
+Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl';
+
+
+$guid='0c13d406-873b-403b-9c09-a5766840d98c';
+$startDate=''20.11.2015 00:00:00';
+$endDate='20.11.2015 15:15:00';
+
+
+$tpMutabakatOzel = new TpMutabakatOzel($guid, $startDate,$endDate);
+$soap = new Soap();
+$res = $soap->send($tpMutabakatOzel)->getSoapResultMethod();
 
 
 
