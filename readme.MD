@@ -1,8 +1,9 @@
 # Turkpos php sanal pos entegresi
- 
+
+
 [![Dılo sürücü](https://www.dokuzyazilim.com/u/dokuzyazilim/news/a/turkpos-logo-1477473837.png)](https://github.com/diloabininyeri)
-
-
+<br>
+Destek dılo sürücü <berxudar@gmail.com>
 
 
 turkpos sanal pos entegre paketi
@@ -649,7 +650,31 @@ $res = $soap->send($tpDekontIslemGonder)->getSoapResultMethod();
 print_r($eposta);
 
 ```
+### class ismi
 
+
+örnek kullanım
+
+```
+use Turkpos\Soap;
+use Turkpos\BuilderObject\TpOzelOranSkGuncelle;
+use Turkpos\Config;
+
+
+Config::$CLIENT_CODE = 10738;
+Config::$CLIENT_USERNAME = 'test';
+Config::$CLIENT_PASSWORD = 'test';
+Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl';
+
+
+$soap = new Soap();
+$tpOzelOranSkGuncelle = new TpOzelOranSkGuncelle($guid, $ozelOranSkId, $mo1, $mo2, $mo3, $mo4, $mo5, $mo6, $mo7, $mo8, $mo9, $mo10, $mo11, $mo12);
+$res=$soap->send($tpOzelOranSkGuncelle)->getSoapResultMethod();
+        
+        
+print_r($res);
+
+```
 #### AYINTILI DOKUMAN
 ### TURK ELEKTRONİK PARA A.Ş
 
