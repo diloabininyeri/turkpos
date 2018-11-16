@@ -650,7 +650,7 @@ $res = $soap->send($tpDekontIslemGonder)->getSoapResultMethod();
 print_r($eposta);
 
 ```
-### class ismi
+### TpOzelOranSkGuncelle
 
 
 örnek kullanım
