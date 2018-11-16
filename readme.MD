@@ -184,7 +184,7 @@ $soap=new Soap();
  örnek kullanım
  
  ````
- $response=$soap->send($object)->getSonucStr();
+ $response=$soap->send($object)->getSonuc();
  
   echo $response;
  ````
@@ -289,28 +289,31 @@ $soap=new Soap();
                 )
  
  ```
-### Development
+### Config 
 
-Want to contribute? Great!
+Config classı static değişkenlere sahip olup bu sayede build edilmeden global olarak tüm
+projede bir kere tanımlanıp her yerde kullanılabilir
 
-Dillinger uses Gulp + Webpack for fast developing.
-Make a change in your file and instantanously see your updates!
 
-Open your favorite Terminal and run these commands.
+Config ayarları yapmak için gerekenler çok basit,her Turksanalpos işlemi için aşağıdaki işlemi configrationları yapmanız lazım
+Laravel gibi bir framewworkla çalışıyorsanız middleware ile sadece bir kere configation yaypıp tum controllerlara bind edebilirsiniz
 
-First Tab:
-```sh
-$ node app
+
 ```
+use Turkpos\Config;
 
-Second Tab:
-```sh
-$ gulp watch
-```
 
-(optional) Third:
-```sh
-$ karma test
+
+
+Config::$CLIENT_CODE = 10738;
+
+Config::$CLIENT_USERNAME = 'test';
+
+Config::$CLIENT_PASSWORD = 'test';
+
+Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl';
+
+
 ```
 #### AYINTILI DOKUMAN
 ### TURK ELEKTRONİK PARA A.Ş
