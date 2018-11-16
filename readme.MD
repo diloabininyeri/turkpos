@@ -482,17 +482,14 @@ use Turkpos\Config;
 
 
 Config::$CLIENT_CODE = 10738;
-
 Config::$CLIENT_USERNAME = 'test';
-
 Config::$CLIENT_PASSWORD = 'test';
-
 Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl';
 
 
 
 
-$tpOzelOranSkListe = new TpOzelOranSkListe('0c13d406-873b-403b-9c09-a5766840d98c');
+$tpOzelOranSkListe = new TpOzelOranSkListe($guid);
 $soap = new Soap();
 $res = $soap->send($tpOzelOranSkListe)->getSoapResultMethod();
 
@@ -548,6 +545,12 @@ use Turkpos\Soap;
 use Turkpos\Config;
 
 
+Config::$CLIENT_CODE = 10738;
+Config::$CLIENT_USERNAME = 'test';
+Config::$CLIENT_PASSWORD = 'test';
+Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl';
+
+
 
 $soap = new Soap();
 
@@ -557,6 +560,37 @@ $res = $soap->send($tpIslemSorgulama)->getSoapResultMethod();
 
 print_r($res);
 
+
+```
+
+
+
+###  TpIslemIptalIade
+
+TpIslemIptalIade sınıfı  iptal iade işlemini yapar
+<br>
+örnek kullanımı
+
+```
+
+use Turkpos\Soap;
+use Turkpos\BuilderObject\TpIslemIptalIade;
+use Turkpos\Config;
+
+
+Config::$CLIENT_CODE = 10738;
+Config::$CLIENT_USERNAME = 'test';
+Config::$CLIENT_PASSWORD = 'test';
+Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl';
+
+
+
+$soap = new Soap();
+$tpIslemIptalIade = new TpIslemIptalIade($guid, $durum, $dekontId);
+$res = $soap->send($tpIslemIptalIade)->getSoapResultMethod();
+
+
+print_r($res);
 
 ```
 
