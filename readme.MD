@@ -318,8 +318,7 @@ Config::$SERVICE_URI = 'https://dmzws.ew.com.tr/turkpos.ws/service_turkpos_test.
 ```
 
 
-
-* ###Ödeme yapma 
+ ### Ödeme yapma 
 
 Ödeme işlemleri Odeme sınıfı ile yapılmaktadır,Odeme sınıfı başarılı olması durumunda sonuç olarak aşağıdaki gibi bir çıktı üretir
 
