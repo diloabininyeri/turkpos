@@ -5,6 +5,8 @@
 
 [![Dılo sürücü](https://www.dokuzyazilim.com/u/dokuzyazilim/news/a/turkpos-logo-1477473837.png)](https://github.com/diloabininyeri)
 <br>
+
+[!Ayrıntılı Döküman](#ayrintili-dokuman)
 Destek dılo sürücü <berxudar@gmail.com>
 
 
@@ -684,7 +686,7 @@ $res=$soap->send($tpOzelOranSkGuncelle)->getSoapResultMethod();
 print_r($res);
 
 ```
-#### AYINTILI DOKUMAN
+#### AYRINTILI DOKUMAN
 ### TURK ELEKTRONİK PARA A.Ş
 
 ## Dış Kurum Entegrasyonları
